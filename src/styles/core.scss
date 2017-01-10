@@ -1,0 +1,59 @@
+@import 'base';
+@import '~normalize.css/normalize';
+
+// Some best-practice CSS that's useful for most apps
+// Just remove them if they're not what you want
+html {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0 auto;
+  padding: 0;
+  height: 100%;
+  padding-top: 20px;
+  background: '#AAA';
+  width: 600px;
+  background-color: #000;
+  font-family: 'Roboto Mono';
+  font-size: 12px;
+  color: white;
+  padding-bottom: 100px;
+  // text-transform: uppercase;
+}
+
+h1 {
+  font-size: 26px;
+  text-transform: uppercase;
+}
+
+h2, h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a:link    { color: white; text-decoration: none;}  /* unvisited links */
+a:visited { color: white }  /* visited links   */
+a:hover   { color: white }  /* user hovers     */
+a:active  { color: white }  /* active links    */
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.blocker {
+  margin-bottom: 10px;
+  padding: 0px;
+  // border: 1px solid white;
+}
