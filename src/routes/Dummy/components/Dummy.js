@@ -11,7 +11,8 @@ class Dummy extends React.Component {
 
     this.state = {
         isRunning: false,
-        speed: 100
+        speed: 100,
+        modules: [this.getRandomModule()]
     }
 
     this.interval = null;
@@ -19,6 +20,9 @@ class Dummy extends React.Component {
 
   buttonClicked (action) {
     switch (action) {
+      case 'add':
+        this.addModule()
+      break;
       case 'go':
         if(!this.state.isRunning) {
           this.setState({isRunning: true})
@@ -45,10 +49,44 @@ class Dummy extends React.Component {
     this.props.dispatch({ type: 'SET_ACTIVE_BLOCK', payload: active })
   }
 
+  getRandomModule() {
+    const MAX = 15
+    const MIN = 8
+    let blockR =  Math.floor(Math.random()*(MAX-MIN+1)+MIN);
+    console.log('val', blockR)
+    let blockRandom = blockR.toString() + 'px';
+
+    return <Blocks key={Math.floor(Math.random() * 10000000)} color={this.getRandomColor()} blockWidth={blockRandom} containerWidth='560px' total={224} />
+  }
+
+  getRandomColor() {
+    var letters = 'ABCDE'.split('');
+    var color = '#';
+    for (var i=0; i<3; i++ ) {
+        color += letters[Math.floor(Math.random() * letters.length)];
+    }
+    return color;
+  }
+
+  addModule() {
+    let modules = this.state.modules;
+    modules.push(this.getRandomModule())
+    this.setState({
+      modules: modules
+    })
+  }
+
+  renderModules() {
+    return this.state.modules
+  }
+
   render () {
     return (
       <div>
         <div className='blocker'>
+          <div style={{display: 'inline-block', borderRadius: 2, padding: 5, width: 100, textAlign: 'center', marginRight: 10, backgroundColor: '#212121'}} onClick={() => this.buttonClicked('add')}>
+            add module
+          </div>
           <div style={{display: 'inline-block', borderRadius: 2, padding: 5, width: 100, textAlign: 'center', marginRight: 10, backgroundColor: '#212121'}} onClick={() => this.buttonClicked('go')}>
             go
           </div>
@@ -56,10 +94,7 @@ class Dummy extends React.Component {
             stop
           </div>
 
-          <Blocks blockWidth='15px' total={224}/>
-          <Blocks color='#ff4141' containerWidth='560px' total={224}/>
-          <Blocks color='#61ff41' containerWidth='500px' total={224}/>
-          <Blocks color='#f041ff' blockWidth='8px' containerWidth='224px' total={224}/>
+          {this.renderModules()}
 
           <p>active block: {this.props.activeBlock}</p>
 
