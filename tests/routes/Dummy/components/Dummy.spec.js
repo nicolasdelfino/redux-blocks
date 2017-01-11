@@ -1,10 +1,16 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import Dummy from 'routes/Dummy/components/Dummy'
-import { shallow } from 'enzyme'
+import Blocks from 'routes/Dummy/components/Blocks'
+import { shallow, mount } from 'enzyme'
 
 describe('(Component) Dummy', () => {
   let _props, _spies, _wrapper
+  let minBlocksProps = {
+    key:0,
+    color:'#FFF',
+    blockWidth:10
+  }
 
   beforeEach(() => {
     _spies = {}
@@ -23,56 +29,7 @@ describe('(Component) Dummy', () => {
     expect(_wrapper.is('div')).to.equal(true)
   })
 
-  describe('A monkey button...', () => {
-    let _button
-
-    beforeEach(() => {
-      // let buttonComponent = _wrapper.find('Button')
-      _button = _wrapper.find('button').filterWhere(a => a.text() === 'set redux dummy to monkey')
-    })
-
-    it('Should dispatch a `setText` action when clicked', () => {
-      _spies.dispatch.should.have.not.been.called
-
-      _button.simulate('click')
-
-      _spies.dispatch.should.have.been.called
-      _spies.setText.should.have.been.called
-    })
+  it('Should have 3 buttons', () => {
+    expect(_wrapper.find('.btn')).to.have.length(3)
   })
-
-  describe('A cat button...', () => {
-    let _button
-
-    beforeEach(() => {
-      // let buttonComponent = _wrapper.find('Button')
-      _button = _wrapper.find('button').filterWhere(a => a.text() === 'set redux dummy to cat')
-    })
-
-    it('Should dispatch a `setText` action when clicked', () => {
-      _spies.dispatch.should.have.not.been.called
-
-      _button.simulate('click')
-
-      _spies.dispatch.should.have.been.called
-      _spies.setText.should.have.been.called
-    })
-  })
-  //
-  // describe('A toggle button...', () => {
-  //   let _button
-  //
-  //   beforeEach(() => {
-  //     _button = _wrapper.find('button').filterWhere(a => a.text() === 'toggle')
-  //   })
-  //
-  //   it('Should dispatch a `toggle` action when clicked', () => {
-  //     _spies.dispatch.should.have.not.been.called
-  //
-  //     _button.simulate('click')
-  //
-  //     _spies.dispatch.should.have.been.called
-  //     _spies.toggle.should.have.been.called
-  //   })
-  // })
 })
